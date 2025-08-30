@@ -975,12 +975,14 @@ getgenv().settings = {
 	harvest = false,
     hive = false,
 	target = false,
-	bale = false
+	bale = false,
+	fish = false
 }
 
 local expand_delay = 0.1
 local craft_delay = 0.1
 
+local FishList = {"252"}
 
 local Players = game:GetService("Players")
 targetName = "USERNAME"
@@ -1030,6 +1032,17 @@ m:Toggle("Auto Harvest", settings.harvest, function (b)
 				game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Harvest"):FireServer(crop.Name)
 			end
 			task.wait(1)
+		end
+	end)
+end)
+m:Toggle("Auto Collect Fish", settings.fish, function (b)
+	settings.fish = b
+	task.spawn(function ()
+		while settings.fish do
+			for _, FISHCRATE in ipairs(FishList) do
+    			game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("CollectFishCrateContents"):FireServer(r)
+			end
+    		task.wait(10)
 		end
 	end)
 end)
