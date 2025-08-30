@@ -963,6 +963,8 @@ local expand = plot:WaitForChild("Expand")
 
 local TurtleLib = game:GetService("CoreGui"):FindFirstChild("TurtleUiLib")
 
+local hayList = {"S192", "S199", "S203"}
+
 getgenv().settings = {
 	farm = false,
 	expand = false,
@@ -971,7 +973,9 @@ getgenv().settings = {
 	gold = false,
 	collect = false,
 	harvest = false,
-    hive = false
+    hive = false,
+	target = false,
+	bale = false
 }
 
 local expand_delay = 0.1
@@ -1018,6 +1022,67 @@ end)
 m:Box("Player Name", function(t) 
     targetName = t
 end)
+m:Toggle("Auto Harvest", settings.harvest, function (b)
+	settings.harvest = b
+	task.spawn(function ()
+		while settings.harvest do
+			for _, crop in pairs(plot:FindFirstChild("Plants"):GetChildren()) do
+				game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Harvest"):FireServer(crop.Name)
+			end
+			task.wait(1)
+		end
+	end)
+end)
+m:Toggle("Auto Add Bale", settings.bale, function (b)
+	settings.bale = b
+	task.spawn(function ()
+		while settings.bale do
+			for _, AddHay in ipairs(hayList) do
+    			game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Animals"):WaitForChild("AddHay"):FireServer(AddHay)
+			end
+    		task.wait(5)
+		end
+	end)
+end)
+m:Toggle("Auto Collect Hive", settings.hive, function (b)
+    settings.hive = b
+    task.spawn(function ()
+        while settings.hive do
+            for _, spot in ipairs(land:GetDescendants()) do
+                if spot:IsA("Model") and spot.Name:match("Spot") then
+                    game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Hive"):FireServer(spot.Parent.Name, spot.Name, 2)
+                end
+            end
+            task.wait(1)
+        end
+    end)
+end)
+m:Toggle("Auto Gold Mine", settings.gold, function (b)
+	settings.gold = b
+	task.spawn(function ()
+		while settings.gold do
+			for _, mine in pairs(land:GetDescendants()) do
+				if mine:IsA("Model") and mine.Name == "GoldMineModel" then
+					game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Goldmine"):FireServer(mine.Parent.Name, 1)
+				end
+			end
+			task.wait(1)
+		end
+	end)
+end)
+m:Toggle("Auto Collect Gold", settings.collect, function (b)
+	settings.collect = b
+	task.spawn(function ()
+		while settings.collect do
+			for _, mine in pairs(land:GetDescendants()) do
+				if mine:IsA("Model") and mine.Name == "GoldMineModel" then
+					game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Goldmine"):FireServer(mine.Parent.Name, 2)
+				end
+			end
+			task.wait(1)
+		end
+	end)
+end)
 m:Toggle("Auto Expand Land", settings.expand, function (b)
 	settings.expand = b
 	task.spawn(function()
@@ -1061,32 +1126,6 @@ m:Toggle("Auto Crafter", settings.craft, function (b)
 		end
 	end)
 end)
-m:Toggle("Auto Gold Mine", settings.gold, function (b)
-	settings.gold = b
-	task.spawn(function ()
-		while settings.gold do
-			for _, mine in pairs(land:GetDescendants()) do
-				if mine:IsA("Model") and mine.Name == "GoldMineModel" then
-					game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Goldmine"):FireServer(mine.Parent.Name, 1)
-				end
-			end
-			task.wait(1)
-		end
-	end)
-end)
-m:Toggle("Auto Collect Gold", settings.collect, function (b)
-	settings.collect = b
-	task.spawn(function ()
-		while settings.collect do
-			for _, mine in pairs(land:GetDescendants()) do
-				if mine:IsA("Model") and mine.Name == "GoldMineModel" then
-					game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Goldmine"):FireServer(mine.Parent.Name, 2)
-				end
-			end
-			task.wait(1)
-		end
-	end)
-end)
 m:Toggle("Auto Sell", settings.sell, function (b)
 	settings.sell = b
 	task.spawn(function ()
@@ -1106,31 +1145,6 @@ m:Toggle("Auto Sell", settings.sell, function (b)
 		end
 	end)
 end)
-m:Toggle("Auto Harvest", settings.harvest, function (b)
-	settings.harvest = b
-	task.spawn(function ()
-		while settings.harvest do
-			for _, crop in pairs(plot:FindFirstChild("Plants"):GetChildren()) do
-				game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Harvest"):FireServer(crop.Name)
-			end
-			task.wait(1)
-		end
-	end)
-end)
-m:Toggle("Auto Collect Hive", settings.hive, function (b)
-    settings.hive = b
-    task.spawn(function ()
-        while settings.hive do
-            for _, spot in ipairs(land:GetDescendants()) do
-                if spot:IsA("Model") and spot.Name:match("Spot") then
-                    game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("Hive"):FireServer(spot.Parent.Name, spot.Name, 2)
-                end
-            end
-            task.wait(1)
-        end
-    end)
-end)
-
 
 local items = {}
 for _, item in ipairs(plr.PlayerGui.Main.Menus.Merchant.Inner.ScrollingFrame.Hold:GetChildren()) do
