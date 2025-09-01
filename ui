@@ -285,9 +285,11 @@ function DiscordLib:Window(text)
 	ServersHoldPadding.Name = "ServersHoldPadding"
 	ServersHoldPadding.Parent = ServersHold
 
-	CloseBtn.MouseButton1Click:Connect(
-		function()
-			MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .3, true)
+	CloseBtn.MouseButton1Click:Connect(function()
+    local gui = game.CoreGui:FindFirstChild("Discord")
+			if gui then
+				gui:Destroy()
+			end
 		end
 	)
 
@@ -3172,6 +3174,7 @@ function DiscordLib:Window(text)
 				LabelTitle.TextXAlignment = Enum.TextXAlignment.Left
 				
 				ChannelHolder.CanvasSize = UDim2.new(0,0,0,ChannelHolderLayout.AbsoluteContentSize.Y)
+				return LabelTitle
 			end
 			
 			function ChannelContent:Bind(text, presetbind, callback)
