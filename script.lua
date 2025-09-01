@@ -1,4 +1,4 @@
-local DiscordLib = loadstring(readfile("discordui/ui.lua"))()
+local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/pndxvo/scr/main/ui.lua"))()
 
 local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
