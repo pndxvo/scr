@@ -44,10 +44,10 @@ ntfy:Toggle("Auto Next", false, function(b)
     task.spawn(function()
         while settings.next do
             if playerGui:FindFirstChild("GameEndedAnimationUI") then
-                task.wait(2)
+                task.wait(0.1)
                 game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Server"):WaitForChild("OnGame"):WaitForChild("Voting"):WaitForChild("VoteNext"):FireServer()
             end
-            task.wait(0.5)
+            task.wait(0.1)
         end
     end)
 end)
