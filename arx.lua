@@ -110,3 +110,13 @@ ntfy:Toggle("Webhook", false, function(b)
         end
     end
 end)
+
+ntfy:Button("Anti AFK", function ()
+	local bb = game:GetService("VirtualUser")
+	plr.Idled:connect(function()
+		bb:CaptureController()
+		bb:ClickButton2(Vector2.new())
+	end)
+	DiscordLib:Notification("Anti AFK", "Enable ✅", "Accept")
+end)
+
