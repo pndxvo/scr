@@ -1595,7 +1595,7 @@ function DiscordLib:Window(text)
 		Text1.Font = Enum.Font.GothamSemibold
 		Text1.Text = titletext
 		Text1.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Text1.TextSize = 20.000
+		Text1.TextSize = 26.000
 
 		Text2.Name = "Text2"
 		Text2.Parent = Notification
@@ -1606,7 +1606,7 @@ function DiscordLib:Window(text)
 		Text2.Font = Enum.Font.Gotham
 		Text2.Text = desctext
 		Text2.TextColor3 = Color3.fromRGB(171, 172, 176)
-		Text2.TextSize = 14.000
+		Text2.TextSize = 18.000
 		Text2.TextWrapped = true
 
 		AlrightBtn.Name = "AlrightBtn"
