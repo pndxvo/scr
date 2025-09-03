@@ -3,6 +3,7 @@ local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/pn
 getgenv().settings = {
     gamespeed = false,
     retry = false,
+	retryf = false,
     next = false,
     notify = false
 }
@@ -40,9 +41,9 @@ ntfy:Toggle("Auto Retry", false, function(b)
 end)
 
 ntfy:Toggle("Auto Retry [FAST]", false, function(b)
-    settings.retry = b
+    settings.retryf = b
     task.spawn(function()
-        while settings.retry do
+        while settings.retryf do
             -- if playerGui:FindFirstChild("GameEndedAnimationUI") then
                 -- task.wait(1)
                 game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Server"):WaitForChild("OnGame"):WaitForChild("Voting"):WaitForChild("VoteRetry"):FireServer()
