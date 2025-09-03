@@ -30,6 +30,19 @@ ntfy:Toggle("Auto Retry", false, function(b)
     settings.retry = b
     task.spawn(function()
         while settings.retry do
+            if playerGui:FindFirstChild("GameEndedAnimationUI") then
+                task.wait(1)
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Server"):WaitForChild("OnGame"):WaitForChild("Voting"):WaitForChild("VoteRetry"):FireServer()
+            end
+            task.wait(0.1)
+        end
+    end)
+end)
+
+ntfy:Toggle("Auto Retry [FAST]", false, function(b)
+    settings.retry = b
+    task.spawn(function()
+        while settings.retry do
             -- if playerGui:FindFirstChild("GameEndedAnimationUI") then
                 -- task.wait(1)
                 game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Server"):WaitForChild("OnGame"):WaitForChild("Voting"):WaitForChild("VoteRetry"):FireServer()
