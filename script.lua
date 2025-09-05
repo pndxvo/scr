@@ -1,4 +1,4 @@
-local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/pndxvo/scr/main/ui.lua"))()
+local DiscordLib = loadstring(readfile("discordui/ui.lua"))()
 
 local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
@@ -10,8 +10,15 @@ local expand = plot:WaitForChild("Expand")
 local hayList = {"S192", "S199", "S203"}
 local FishList = {"252"}
 
+local bb = game:GetService("VirtualUser")
+plr.Idled:connect(function()
+	bb:CaptureController()
+	bb:ClickButton2(Vector2.new())
+end)
+
 getgenv().settings = {
     farm = false,
+	farmfast = false,
     expand = false,
 	target = false,
     hive = false,
@@ -23,7 +30,8 @@ getgenv().settings = {
     buy = false,
 	afk = false,
 	clover = false,
-    sell = false
+    sell = false,
+	noclip = false
 }
 
 local win = DiscordLib:Window("pndx cheat")
@@ -42,6 +50,20 @@ tgls:Toggle("Auto Farm Resource", false, function(b)
 			task.wait(.1)
 		end
 	end)
+end)
+
+tgls:Toggle("Auto Farm Resource [Fast]", false, function(b)
+    settings.farmfast = b
+    task.spawn(function()
+        while settings.farmfast do
+            for _, r in ipairs(resources:GetChildren()) do
+                for i = 1, 2 do
+                    game:GetService("ReplicatedStorage"):WaitForChild("Communication"):WaitForChild("HitResource"):FireServer(r)
+                end
+            end
+            task.wait(1)
+        end
+    end)
 end)
 
 tgls:Toggle("Auto Expand", false, function(b)
@@ -318,13 +340,24 @@ ply:Button("Speed to Default", function()
     humanoid.WalkSpeed = 16
 end)
 
-ply:Button("Anti AFK", function ()
-	local bb = game:GetService("VirtualUser")
-	plr.Idled:connect(function()
-		bb:CaptureController()
-		bb:ClickButton2(Vector2.new())
-	end)
-	DiscordLib:Notification("⚠️", "Anti Afk enabled", "Accept")
-end)
+local serv = win:Server("Misc", "http://www.roblox.com/asset/?id=6031075938")
 
-win:Server("Misc", "http://www.roblox.com/asset/?id=6031075938")
+local fps = serv:Channel("Setting")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "DarkModeUI"
+gui.IgnoreGuiInset = true
+gui.DisplayOrder = 999
+gui.Parent = plr:WaitForChild("PlayerGui")
+
+local blackScreen = Instance.new("Frame")
+	blackScreen.Size = UDim2.new(1, 0, 1, 0)
+	blackScreen.Position = UDim2.new(0, 0, 0, 0)
+	blackScreen.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	blackScreen.BackgroundTransparency = 0
+	blackScreen.Visible = false
+	blackScreen.Parent = gui
+
+fps:Toggle("Dark Mode", false, function(b)
+    blackScreen.Visible = b
+end)
