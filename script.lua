@@ -10,10 +10,10 @@ local expand = plot:WaitForChild("Expand")
 local hayList = {"S192", "S199", "S203"}
 local FishList = {"252"}
 
-local bb = game:GetService("VirtualUser")
-plr.Idled:connect(function()
-	bb:CaptureController()
-	bb:ClickButton2(Vector2.new())
+local VirtualUser = game:GetService('VirtualUser')
+game:GetService('Players').LocalPlayer.Idled:Connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
 end)
 
 getgenv().settings = {
