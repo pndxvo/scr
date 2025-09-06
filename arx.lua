@@ -104,7 +104,7 @@ local function sendWebhook(ui, x)
                     },
                     { 
                         name = "Time Total", 
-                        value = ("%s"):format(x.Value)
+                        value = ("%s วินาที"):format(x.Value)
                     }
                 },
                 timestamp = DateTime.now():ToIsoDate(),
