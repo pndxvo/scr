@@ -17,10 +17,10 @@ local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
 local playerGui = plr:WaitForChild("PlayerGui")
 
-local bb = game:GetService("VirtualUser")
-plr.Idled:connect(function()
-    bb:CaptureController()
-    bb:ClickButton2(Vector2.new())
+local VirtualUser = game:GetService('VirtualUser')
+game:GetService('Players').LocalPlayer.Idled:Connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
 end)
 
 ntfy:Toggle("Game Speed 3x", false, function(b)
