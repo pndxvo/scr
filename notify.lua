@@ -27,12 +27,14 @@ function NotificationLibrary:SendNotification(Mode, Text, Duration)
                 local Notification = templateFolder:WaitForChild(Mode):Clone()
                 local filler = Notification.Filler
                 local bar = Notification.bar
+
                 Notification.Header.Text = Text
                 Notification.Header.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        
-                Notification.Header.TextXAlignment = Enum.TextXAlignment.Center -- กึ่งกลางแนวนอน
-                Notification.Header.TextYAlignment = Enum.TextYAlignment.Center -- กึ่งกลางแนวตั้ง
-                        
+                Notification.Header.TextScaled = false
+                Notification.Header.TextSize = 20
+                Notification.Header.TextWrapped = true 
+                Notification.Header.TextYAlignment = Enum.TextYAlignment.Center
+
                 Notification.Visible = true
                 Notification.Parent = canvas
     
