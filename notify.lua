@@ -28,7 +28,7 @@ function NotificationLibrary:SendNotification(Mode, Text, Duration)
                 local filler = Notification.Filler
                 local bar = Notification.bar
                 Notification.Header.Text = Text
-                Notification.Header.TextSize = 20
+                Notification.Header.TextSize = 36
                 
                 Notification.Visible = true
                 Notification.Parent = canvas
