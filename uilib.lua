@@ -140,7 +140,7 @@ NotifsHolderListing.Padding = UDim.new(0, 5)
 
 ---HOLDERS END---
 
-function lib:Create(ver, size, hidekey)
+function lib:Create(time, size, hidekey)
 	local hidekey = hidekey or Enum.KeyCode.RightShift
 	local MainFrame = Instance.new("Frame")
 	MainFrame.Name = "MainFrame"
@@ -512,19 +512,19 @@ function lib:Create(ver, size, hidekey)
 	Username.TextSize = 12.000
 	Username.TextXAlignment = Enum.TextXAlignment.Left
 
-	local Etc = Instance.new("TextLabel")
-	Etc.Name = "Etc"
-	Etc.Parent = ProfileInfo
-	Etc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Etc.BackgroundTransparency = 1.000
-	Etc.Position = UDim2.new(0, 0, 0.5, 0)
-	Etc.Size = UDim2.new(1, -10, 0, 14)
-	Etc.Font = Enum.Font.GothamMedium
-	Etc.Text = ver
-	Etc.RichText = true
-	Etc.TextColor3 = Color3.fromRGB(120, 124, 123)
-	Etc.TextSize = 12.000
-	Etc.TextXAlignment = Enum.TextXAlignment.Left
+	local TimeLeft = Instance.new("TextLabel")
+	TimeLeft.Name = "TimeLeft"
+	TimeLeft.Parent = ProfileInfo
+	TimeLeft.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TimeLeft.BackgroundTransparency = 1.000
+	TimeLeft.Position = UDim2.new(0, 0, 0.5, 0)
+	TimeLeft.Size = UDim2.new(1, -10, 0, 14)
+	TimeLeft.Font = Enum.Font.GothamMedium
+	TimeLeft.Text = time
+	TimeLeft.RichText = true
+	TimeLeft.TextColor3 = Color3.fromRGB(120, 124, 123)
+	TimeLeft.TextSize = 12.000
+	TimeLeft.TextXAlignment = Enum.TextXAlignment.Left
 
 	local ProfilePictureOutline = Instance.new("Frame")
 	ProfilePictureOutline.Name = "ProfilePictureOutline"
@@ -2471,7 +2471,7 @@ function lib:Create(ver, size, hidekey)
 		end
 		return subtabs
 	end
-	return tabs
+	return tabs, TimeLeft
 end
 function lib:Notify(title, desc, dur)
 	local Notification = Instance.new("Frame")
