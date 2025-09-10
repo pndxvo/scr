@@ -599,10 +599,10 @@ function lib:Create(ver, size, hidekey)
 	SearchBox.Position = UDim2.new(1, -6, 0.5, 0)
 	SearchBox.Size = UDim2.new(1, -58, 1, 0)
 	SearchBox.Font = Enum.Font.Gotham
-	SearchBox.PlaceholderColor3 = Color3.fromRGB(255, 70, 85)
+	SearchBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
 	SearchBox.PlaceholderText = "Search..."
 	SearchBox.Text = ""
-	SearchBox.TextColor3 = Color3.fromRGB(255, 70, 85)
+	SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 	SearchBox.TextSize = 12.000
 	SearchBox.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -615,13 +615,13 @@ function lib:Create(ver, size, hidekey)
 	SearchIcon.Position = UDim2.new(0, 10, 0.5, 0)
 	SearchIcon.Size = UDim2.new(0, 18, 0, 18)
 	SearchIcon.Image = "rbxassetid://9992305542"
-	SearchIcon.ImageColor3 = Color3.fromRGB(255, 70, 85)
+	SearchIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
 
 	local SearchBackLine = Instance.new("Frame")
 	SearchBackLine.Name = "SearchBackLine"
 	SearchBackLine.Parent = SearchBack
 	SearchBackLine.AnchorPoint = Vector2.new(0, 0.5)
-	SearchBackLine.BackgroundColor3 = Color3.fromRGB(255, 70, 85)
+	SearchBackLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	SearchBackLine.Position = UDim2.new(0, 38, 0.5, 0)
 	SearchBackLine.Size = UDim2.new(0, 1, 1, -20)
 
