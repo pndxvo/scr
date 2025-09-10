@@ -429,7 +429,7 @@ function lib:Create(ver, size, hidekey)
 	xyzlogo.Name = "xyzlogo"
 
 	xyzlogo.Parent = LeftBarBack
-	xyzlogo.Text = "</>"
+	xyzlogo.Text = ">///<"
 	xyzlogo.TextSize = 32
 	xyzlogo.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json",Enum.FontWeight.Bold,Enum.FontStyle.Normal)
 	xyzlogo.TextColor3 = Color3.fromRGB(255, 255, 255)
